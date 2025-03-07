@@ -16,11 +16,11 @@ Thumbs.db
 *.swns
 
 # Ignore environment files
-.env
-.env.local
-.env.development
-.env.production
-.env.test
+# .env
+# .env.local
+# .env.development
+# .env.production
+# .env.test
 
 # ---------------------------
 # FASTAPI (BackEnd)
