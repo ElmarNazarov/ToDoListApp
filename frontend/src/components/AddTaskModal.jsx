@@ -41,10 +41,10 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center  bg-opacity-50 backdrop-blur-md">
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-50 backdrop-blur-md p-4">
       <div
-        className="bg-white p-6 rounded-2xl shadow-lg w-[400px] border border-gray-200 transform transition-all
-        scale-95 animate-fade-in"
+        className="bg-white p-4 sm:p-6 rounded-2xl shadow-lg w-[95%] sm:w-[450px] lg:w-[500px] border border-gray-200 
+        transform transition-all scale-95 animate-fade-in max-h-[90vh] overflow-y-auto relative"
       >
         <button
           onClick={onClose}
@@ -52,8 +52,11 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
         >
           ✖
         </button>
-
-        <h2 className="text-2xl font-bold text-gray-800 mb-5 text-center">Добавить новую задачу</h2>
+  
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4 text-center">
+          Добавить новую задачу
+        </h2>
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-600">Заглавие</label>
@@ -65,7 +68,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
               required
             />
           </div>
-
+  
           <div>
             <label className="block text-sm font-medium text-gray-600">Описание</label>
             <textarea
@@ -75,7 +78,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
               required
             />
           </div>
-
+  
           <div>
             <label className="block text-sm font-medium text-gray-600">Статус</label>
             <select
@@ -88,7 +91,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
               <option value="completed">Завершенная</option>
             </select>
           </div>
-
+  
           <div>
             <label className="block text-sm font-medium text-gray-700">Крайний срок</label>
             <input
@@ -99,18 +102,18 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
               required
             />
           </div>
-
-          <div className="flex justify-between mt-6">
+  
+          <div className="flex flex-wrap gap-2 justify-between mt-6">
             <button
               type="button"
-              className="px-5 py-2 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 transition"
+              className="px-5 py-2 w-full sm:w-auto rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 transition"
               onClick={onClose}
             >
               Отмена
             </button>
             <button
               type="submit"
-              className="px-5 py-2 rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
+              className="px-5 py-2 w-full sm:w-auto rounded-lg bg-blue-500 text-white hover:bg-blue-600 transition"
             >
               Добавить задачу
             </button>

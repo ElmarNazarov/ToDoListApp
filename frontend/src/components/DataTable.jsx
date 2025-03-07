@@ -117,140 +117,122 @@ const DataTable = ({ data }) => {
 
   return (
     <div className="p-4 bg-white rounded shadow-md border border-gray-200">
-      <div className="flex justify-between items-center mb-4">
-        <div>
-          <label className="text-gray-600 mr-2">Показать по</label>
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4 gap-2">
+        <div className="flex items-center">
+          <label className="text-gray-600 mr-2 text-sm md:text-base">Показать по</label>
           <select
             value={rowsPerPage}
             onChange={(e) => setRowsPerPage(Number(e.target.value))}
-            className="p-2 border border-gray-300 rounded"
+            className="p-2 border border-gray-300 rounded text-sm md:text-base"
           >
             <option value="5">5</option>
             <option value="10">10</option>
             <option value="20">20</option>
           </select>
-          <span className="ml-2 text-gray-600">записей</span>
+          <span className="ml-2 text-gray-600 text-sm">записей</span>
         </div>
-
-        {/* Search Bar */}
+  
         <input
           type="text"
-          placeholder="Search..."
+          placeholder="Поиск..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="p-2 border border-gray-300 rounded"
+          className="p-2 border border-gray-300 rounded w-full md:w-auto text-sm"
         />
       </div>
-
-      <table className="w-full border-collapse border border-gray-300 text-center">
-        <thead className="bg-gray-100">
-          <tr>
-            <th className="p-3 border border-gray-300"></th>
-            <th className="p-3 border border-gray-300 cursor-pointer" onClick={() => handleSort("title")}>
-              Заглавие {sortConfig?.key === "title" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
-            </th>
-            <th className="p-3 border border-gray-300 cursor-pointer" onClick={() => handleSort("description")}>
-              Описание {sortConfig?.key === "description" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
-            </th>
-            <th className="p-3 border border-gray-300 cursor-pointer" onClick={() => handleSort("status")}>
-              Статус {sortConfig?.key === "status" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
-            </th>
-            <th className="p-3 border border-gray-300 cursor-pointer" onClick={() => handleSort("created_at")}>
-              Созданный на {sortConfig?.key === "created_at" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
-            </th>
-            <th className="p-3 border border-gray-300 cursor-pointer" onClick={() => handleSort("deadline")}>
-              Крайний срок {sortConfig?.key === "deadline" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
-            </th>
-            <th className="p-3 border border-gray-300">Действия</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedData.length > 0 ? (
-            paginatedData.map((row, index) => (
-              <React.Fragment key={index}>
-                <tr className="hover:bg-gray-100">
-                  <td className="p-3 border border-gray-300 text-center">
-                    <button onClick={() => toggleRow(index)} className="text-lg">
-                      {expandedRow === index ? "▼" : "▶"}
-                    </button>
-                  </td>
-                  <td className="p-3 border border-gray-300">{row.title}</td>
-                  <td className="p-3 border border-gray-300 max-w-[300px] truncate overflow-hidden whitespace-nowrap">{row.description}</td>
-                  <td className="p-3 border border-gray-300">
-                    {editingIndex === index ? (
-                      <div className="flex items-center justify-between">
-                        <div/>
-                        <select
-                          value={newStatus}
-                          onChange={(e) => setNewStatus(e.target.value)}
-                          className="px-3 py-1 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:border-blue-400 transition bg-white text-gray-700 text-center appearance-none w-40 cursor-pointer"
-                        >
-                          <option value="new">Ожидание</option>
-                          <option value="in_progress">В процессе</option>
-                          <option value="completed">Завершено</option>
-                        </select>
-                        <div className="flex flex-row space-x-2">
-                          <button
-                            onClick={() => handleSaveStatus(row.id, row)}
-                            className="px-3 py-1 text-white bg-blue-500 rounded-lg shadow-md hover:bg-blue-600 transition focus:ring-2 focus:ring-blue-300 focus:outline-none"
+  
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse border border-gray-300 text-center text-sm">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="p-3 border border-gray-300"></th>
+              <th className="p-3 border border-gray-300 cursor-pointer" onClick={() => handleSort("title")}>
+                Заглавие {sortConfig?.key === "title" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
+              </th>
+              <th className="p-3 border border-gray-300 cursor-pointer hidden sm:table-cell" onClick={() => handleSort("description")}>
+                Описание {sortConfig?.key === "description" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
+              </th>
+              <th className="p-3 border border-gray-300 cursor-pointer " onClick={() => handleSort("status")}>
+                Статус {sortConfig?.key === "status" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
+              </th>
+              <th className="p-3 border border-gray-300 cursor-pointer " onClick={() => handleSort("created_at")}>
+                Создан {sortConfig?.key === "created_at" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
+              </th>
+              <th className="p-3 border border-gray-300 cursor-pointer hidden lg:table-cell" onClick={() => handleSort("deadline")}>
+                Крайний срок {sortConfig?.key === "deadline" ? (sortConfig.direction === "asc" ? upArrow : downArrow) : ""}
+              </th>
+              <th className="p-3 border border-gray-300">Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedData.length > 0 ? (
+              paginatedData.map((row, index) => (
+                <React.Fragment key={index}>
+                  <tr className="hover:bg-gray-100">
+                    <td className="p-3 border border-gray-300 text-center">
+                      <button onClick={() => toggleRow(index)} className="text-lg">
+                        {expandedRow === index ? "▼" : "▶"}
+                      </button>
+                    </td>
+                    <td className="p-3 border border-gray-300">{row.title}</td>
+                    <td className="p-3 border border-gray-300 truncate overflow-hidden whitespace-nowrap hidden sm:table-cell">{row.description}</td>
+                    <td className="p-3 border border-gray-300">
+                      {editingIndex === index ? (
+                        <div className="flex items-center justify-between">
+                          <div />
+                          <select
+                            value={newStatus}
+                            onChange={(e) => setNewStatus(e.target.value)}
+                            className="px-2 py-1 border border-gray-300 rounded-md bg-white w-28 text-sm"
                           >
+                            <option value="new">Ожидание</option>
+                            <option value="in_progress">В процессе</option>
+                            <option value="completed">Завершено</option>
+                          </select>
+                          <button onClick={() => handleSaveStatus(row.id, row)} className="px-2 py-1 text-white bg-blue-500 rounded-md hover:bg-blue-600 text-xs">
                             Сохранить
                           </button>
-                          <button
-                            onClick={() => setEditingIndex(null)}
-                            className="px-3 py-1 text-gray-700 bg-gray-200 rounded-lg shadow-md hover:bg-gray-300 transition focus:ring-2 focus:ring-gray-400 focus:outline-none"
-                          >
-                            Отмена
+                        </div>
+                      ) : (
+                        <div className="flex justify-between">
+                          <div />
+                          <span className={statusClass(row.status)}>{formatStatus(row.status)}</span>
+                          <button onClick={() => handleEditStatus(index, row.status)} className="px-2 py-1 text-blue-600 font-semibold bg-blue-100 rounded-md hover:bg-blue-200 text-xs">
+                            Изменить
                           </button>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-between">
-                        <div/>
-                        <span className={statusClass(row.status)}>{formatStatus(row.status)}</span>
-                        <button
-                          onClick={() => handleEditStatus(index, row.status)}
-                          className="px-3 py-1 text-blue-600 font-semibold bg-blue-100 rounded-lg shadow-sm hover:bg-blue-200 transition focus:ring-2 focus:ring-blue-300 focus:outline-none"
-                        >
-                          Изменить
-                        </button>
-                      </div>
-                    )}
-                  </td>
-                  <td className="p-3 border border-gray-300">{formatDate(row.created_at)}</td>
-                  <td className="p-3 border border-gray-300">{formatDate(row.deadline)}</td>
-                  <td className="p-3 border border-gray-300">
-                    <div className="flex space-x-2 justify-center">
-                      <button
-                        onClick={() => handleDeleteTask(row.id)}
-                        className="px-3 py-1 text-white bg-red-500 rounded hover:bg-red-600 cursor-pointer"
-                      >
+                      )}
+                    </td>
+                    <td className="p-3 border border-gray-300 ">{formatDate(row.created_at)}</td>
+                    <td className="p-3 border border-gray-300 hidden lg:table-cell">{formatDate(row.deadline)}</td>
+                    <td className="p-3 border border-gray-300">
+                      <button onClick={() => handleDeleteTask(row.id)} className="px-2 py-1 text-white bg-red-500 rounded-md hover:bg-red-600 text-xs">
                         Удалить
                       </button>
-                    </div>
-                  </td>
-                </tr>
-                {expandedRow === index && (
-                  <tr className="bg-gray-100">
-                    <td colSpan="7" className="p-3 border border-gray-300">
-                      {row.description}
                     </td>
                   </tr>
-                )}
-              </React.Fragment>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="7" className="p-3 border border-gray-300 text-center text-gray-500">
-                Никаких результатов найдено не было
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-
+                  {expandedRow === index && (
+                    <tr className="bg-gray-100">
+                      <td colSpan="7" className="p-3 border border-gray-300">
+                        {row.description}
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="7" className="p-3 border border-gray-300 text-center text-gray-500">
+                  Никаких результатов найдено не было
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+  
       {/* Пагинация */}
-      <div className="mt-4 flex justify-between items-center text-gray-700">
+      <div className="mt-4 hidden lg:flex justify-between items-center text-gray-700 ">
         <span className="text-sm">
           Показано {(currentPage - 1) * rowsPerPage + 1} -{" "}
           {Math.min(currentPage * rowsPerPage, filteredData.length)} из {filteredData.length} записей
@@ -322,8 +304,30 @@ const DataTable = ({ data }) => {
         </div>
       </div>
 
+      <div className="mt-4 lg:hidden flex flex-col md:flex-row justify-between items-center text-gray-700 text-sm">
+        <span>
+          Показано {(currentPage - 1) * rowsPerPage + 1} -{" "}
+          {Math.min(currentPage * rowsPerPage, filteredData.length)} из {filteredData.length} записей
+        </span>
+  
+        <div className="flex space-x-2 mt-2 md:mt-0">
+          <button className="px-2 py-1 border rounded text-xs md:text-sm" onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>
+            «
+          </button>
+          <button className="px-2 py-1 border rounded text-xs md:text-sm" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+            ‹
+          </button>
+          <button className="px-2 py-1 border rounded text-xs md:text-sm" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>
+            ›
+          </button>
+          <button className="px-2 py-1 border rounded text-xs md:text-sm" onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages}>
+            »
+          </button>
+        </div>
+      </div>
     </div>
   );
+  
 };
 
 export default DataTable;

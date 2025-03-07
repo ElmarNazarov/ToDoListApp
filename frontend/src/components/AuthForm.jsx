@@ -39,52 +39,57 @@ const AuthForm = ({ isLogin }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-700">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-2xl font-bold text-center">{isLogin ? "Login" : "Register"}</h2>
-
-        <form onSubmit={handleSubmit} className="mt-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-700 px-4">
+      <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg w-[95%] sm:w-[400px] md:w-[450px]">
+        <h2 className="text-xl sm:text-2xl font-bold text-center">
+          {isLogin ? "Login" : "Register"}
+        </h2>
+  
+        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <input
             type="email"
             name="email"
             placeholder="Электронная почта"
             value={formData.email}
             onChange={handleInputChange}
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none"
+            className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
             required
           />
-
-          <div className="relative w-full mt-4">
+  
+          <div className="relative w-full">
             <input
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Пароль"
               value={formData.password}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none pr-10"
+              className="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 pr-12"
               required
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700 transition cursor-pointer"
+              className="absolute inset-y-0 right-4 flex items-center text-gray-500 hover:text-gray-700 transition cursor-pointer"
             >
-              {showPassword ? <AiFillEye size={20} /> : <AiFillEyeInvisible size={20} />}
+              {showPassword ? <AiFillEye size={22} /> : <AiFillEyeInvisible size={22} />}
             </button>
           </div>
-
+  
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-blue-600 transition cursor-pointer"
+            className="w-full bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition cursor-pointer disabled:opacity-50"
             disabled={loading}
           >
             {loading ? "Обработка..." : isLogin ? "Войти" : "Зарегистрироваться"}
           </button>
         </form>
-
+  
         <p className="text-center text-sm mt-4">
           {isLogin ? "У вас нет учетной записи?" : "У вас уже есть учетная запись?"}{" "}
-          <a href={isLogin ? "/auth/register" : "/auth/login"} className="text-blue-500 hover:underline cursor-pointer">
+          <a
+            href={isLogin ? "/auth/register" : "/auth/login"}
+            className="text-blue-500 hover:underline cursor-pointer"
+          >
             {isLogin ? "Регистрация" : "Войти в систему"}
           </a>
         </p>
