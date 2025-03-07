@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { deleteTask, updateTaskStatus } from "@/app/api/tasks";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { updateTaskStatus, deleteTask } from "@/app/api/tasks";
 
 const DataTable = ({ data }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -106,7 +106,7 @@ const DataTable = ({ data }) => {
       case "in_progress":
         return "В ПРОЦЕССЕ";
       case "completed":
-        return "ЗАКОНЧЕНО";
+        return "ЗАВЕРШЕНО";
       default:
         return status;
     }
@@ -187,7 +187,7 @@ const DataTable = ({ data }) => {
                         >
                           <option value="new">Ожидание</option>
                           <option value="in_progress">В процессе</option>
-                          <option value="completed">Законченно</option>
+                          <option value="completed">Завершено</option>
                         </select>
                         <div className="flex flex-row space-x-2">
                           <button
