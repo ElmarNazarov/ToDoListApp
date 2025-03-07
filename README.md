@@ -80,29 +80,31 @@
 ---
 
 ## 4. Структура проекта
-```
 ├── BackEnd/                # Бэкенд на FastAPI
 │   ├── app/                # Основные модули
+│   │   ├── crud/           # Логика CRUD операций
+│   │   ├── endpoints/      # API эндпоинты
+│   │   ├── utils/          # Вспомогательные модули
 │   ├── tests/              # Тесты
 │   ├── requirements.txt    # Зависимости
 │   ├── main.py             # Точка входа API
-│   ├── database.py         # Настройка базы данных
-│   ├── endpoints/          # API эндпоинты
-│   └── utils/              # Вспомогательные модули
+│   └── database.py         # Настройка базы данных
 │
 ├── frontend/               # Фронтенд на Next.js
-│   ├── pages/              # Основные страницы
-│   ├── components/         # Компоненты UI
 │   ├── public/             # Статические файлы
-│   ├── package.json        # Список зависимостей
-│   └── next.config.js      # Конфигурация Next.js
+│   ├── src/                # Исходные файлы
+│   │   ├── app/            # Основные страницы и API
+│   │   ├── components/     # UI-компоненты
+│   │   ├── context/        # Глобальные контексты
+│   │   └── lib/            # Вспомогательные функции
+│   └── package.json        # Список зависимостей
 │
 ├── Dockerfile.backend      # Dockerfile для бэкенда
 ├── Dockerfile.frontend     # Dockerfile для фронтенда
 ├── docker-compose.yml      # Конфигурация Docker Compose
 ├── .env                    # Переменные окружения
 └── README.md               # Документация
-```
+
 
 ---
 
