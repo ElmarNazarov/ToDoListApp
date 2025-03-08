@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
           draggable
           theme="colored"
         />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow bg-gray-100">{children}</main>
       </body>
     </html>
   );
