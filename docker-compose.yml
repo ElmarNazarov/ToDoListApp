@@ -17,8 +17,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-      cache_from:
-        - backend:latest
+      # cache_from:
+      #   - backend:latest
     depends_on:
       - db
     env_file:
@@ -34,8 +34,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.frontend
-      cache_from:
-        - frontend:latest
+      # cache_from:
+      #   - frontend:latest
     depends_on:
       - backend
     ports:
