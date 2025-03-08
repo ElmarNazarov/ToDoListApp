@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useState, useEffect, useContext } from "react";
-import { getUserInfo } from "@/app/api/auth";
+import { getUserInfo } from "@/lib/apiFunctions/auth";
 import { useRouter } from "next/navigation";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 

@@ -5,6 +5,7 @@ from app.schemas import TaskCreate
 from app.utils.id import generate_unique_id
 from typing import List
 
+# Создание задачи
 def create_task(db: Session, title: str, description: str, status: TaskStatus, deadline, owner_id: str) -> Task:
     # Проверка существует ли пользователь
     user = db.query(User).filter(User.id == owner_id).first()
@@ -14,12 +15,15 @@ def create_task(db: Session, title: str, description: str, status: TaskStatus, d
     new_task = Task.create(db, title=title, description=description, status=status, deadline=deadline, owner_id=owner_id)
     return new_task
 
+# Получить все задачи
 def get_all_tasks(db: Session) -> List[Task]:
     return db.query(Task).all()
 
+# Получить задачи по пользователю
 def get_tasks_by_user(db: Session, user_id: str) -> List[Task]:
     return db.query(Task).filter(Task.owner_id == user_id).all()
 
+# Обновить задачу
 def update_task(db: Session, task_id: str, task_data: TaskCreate) -> Task:
     task = db.query(Task).filter(Task.id == task_id).first()
     if not task:
@@ -32,6 +36,7 @@ def update_task(db: Session, task_id: str, task_data: TaskCreate) -> Task:
     db.refresh(task)
     return task
 
+# Удалить задачу
 def delete_task(db: Session, task_id: str):
     task = db.query(Task).filter(Task.id == task_id).first()
     if not task:

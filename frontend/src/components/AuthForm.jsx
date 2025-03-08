@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { loginUser, registerUser } from "@/app/api/auth";
+import { loginUser, registerUser } from "@/lib/apiFunctions/auth";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const AuthForm = ({ isLogin }) => {
   const [formData, setFormData] = useState({ email: "", password: "" });

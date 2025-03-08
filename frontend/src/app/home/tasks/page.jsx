@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import DataTable from "@/components/DataTable";
-import { getTasks, createTask } from "@/app/api/tasks"; // Import API functions
 import AddTaskModal from "@/components/AddTaskModal";
+import DataTable from "@/components/DataTable";
 import { useUser } from "@/context/UserContext";
+import { createTask, getTasks, getUserTasks } from "@/lib/apiFunctions/tasks";
+import { useEffect, useState } from "react";
 
 // Тестовые задачи
 const initialTasks = [
@@ -26,14 +26,16 @@ export default function TasksPage() {
     fetchTasks();
   }, []);
 
-  const fetchTasks = async () => {
+  const fetchTasks = async (by_user = true) => {
     try {
-      const tasksData = await getTasks();
+      // Запрашивает либо все задачи, либо только задачи текущего пользователя
+      const tasksData = by_user ? await getUserTasks(user.id) : await getTasks();
       setTasks(tasksData);
     } catch (error) {
-      console.error("Задачи выборки ошибок:", error);
+      console.error("Ошибка выборки задач:", error);
     }
   };
+  
 
   const handleAddTask = async (taskData) => {
     if (!user) return;
@@ -62,8 +64,11 @@ export default function TasksPage() {
           + Новая задача
         </button>
       </div>
-  
+
+      {/* Таблица задач */}
       <DataTable data={tasks} />
+
+      {/* Модал создания задачи */}
       <AddTaskModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

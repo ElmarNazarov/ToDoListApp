@@ -59,6 +59,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
         
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
+          {/* Заглавие */}
             <label className="block text-sm font-medium text-gray-600">Заглавие</label>
             <input
               type="text"
@@ -70,6 +71,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
           </div>
   
           <div>
+          {/* Описание */}
             <label className="block text-sm font-medium text-gray-600">Описание</label>
             <textarea
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -80,6 +82,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
           </div>
   
           <div>
+          {/* Статус */}
             <label className="block text-sm font-medium text-gray-600">Статус</label>
             <select
               className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
@@ -93,6 +96,7 @@ const AddTaskModal = ({ isOpen, onClose, onAddTask }) => {
           </div>
   
           <div>
+          {/* Крайний срок */}
             <label className="block text-sm font-medium text-gray-700">Крайний срок</label>
             <input
               type="datetime-local"

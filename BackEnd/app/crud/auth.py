@@ -4,6 +4,7 @@ from app.models import User
 from app.utils.security import get_password_hash, verify_password, create_access_token
 from typing import List
 
+# Регистрация пользователя
 def register_user(db: Session, email: str, password: str) -> User:
     existing_user = db.query(User).filter(User.email == email).first()
     if existing_user:
@@ -11,6 +12,7 @@ def register_user(db: Session, email: str, password: str) -> User:
     new_user = User.create(db, email=email, hashed_password=get_password_hash(password))
     return new_user
 
+# Логин пользователя
 def login_user(db: Session, email: str, password: str) -> dict:
     user = db.query(User).filter(User.email == email).first()
     if not user or not verify_password(password, user.hashed_password):
@@ -19,5 +21,6 @@ def login_user(db: Session, email: str, password: str) -> dict:
     access_token = create_access_token({"id": user.id, "sub": user.email})
     return {"access_token": access_token, "token_type": "bearer"}
 
+# Получить всех пользователей из базы данных
 def get_all_users(db: Session) -> List[User]:
     return db.query(User).all()

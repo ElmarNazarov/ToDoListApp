@@ -4,8 +4,8 @@ import { useUser } from "@/context/UserContext";
 export default function HomePage() {
   const user = useUser().user;
 
-
   if (!user) {
+    // До того как информация о пользователе пришла
     return (
       <div className="flex flex-col items-center justify-center w-full h-screen p-4">
         <h3 className="text-lg sm:text-2xl text-center font-bold">

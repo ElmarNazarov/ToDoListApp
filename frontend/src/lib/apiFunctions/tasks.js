@@ -1,5 +1,6 @@
 import axiosBase from "@/lib/axiosBase";
 
+// Создать задачу
 export const createTask = async (taskData) => {
   try {
     const response = await axiosBase.post("/tasks/", taskData);
@@ -9,6 +10,7 @@ export const createTask = async (taskData) => {
   }
 };
 
+// Получить все задачи
 export const getTasks = async () => {
   try {
     const response = await axiosBase.get("/tasks/");
@@ -18,6 +20,7 @@ export const getTasks = async () => {
   }
 };
 
+// Получить задачи по пользователю
 export const getUserTasks = async (userId) => {
   try {
     const response = await axiosBase.get(`/tasks/user/${userId}`);
@@ -27,6 +30,7 @@ export const getUserTasks = async (userId) => {
   }
 };
 
+// Обновить задачу
 export const updateTaskStatus = async (taskId, status, currentTask) => {
   try {
     const response = await axiosBase.put(`/tasks/${taskId}`, {
@@ -43,7 +47,7 @@ export const updateTaskStatus = async (taskId, status, currentTask) => {
 };
 
 
-// ✅ Delete a task
+// Удалить задачу
 export const deleteTask = async (taskId) => {
   try {
     const response = await axiosBase.delete(`/tasks/${taskId}`);

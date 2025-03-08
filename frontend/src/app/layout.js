@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
+        {/* Уведомления в приложении */}
         <ToastContainer 
           position="top-right"
           autoClose={3000}

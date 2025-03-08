@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteTask, updateTaskStatus } from "@/app/api/tasks";
+import { deleteTask, updateTaskStatus } from "@/lib/apiFunctions/tasks";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -232,6 +232,8 @@ const DataTable = ({ data }) => {
       </div>
   
       {/* Пагинация */}
+
+      {/* Для больших экранов */}
       <div className="mt-4 hidden lg:flex justify-between items-center text-gray-700 ">
         <span className="text-sm">
           Показано {(currentPage - 1) * rowsPerPage + 1} -{" "}
@@ -304,6 +306,7 @@ const DataTable = ({ data }) => {
         </div>
       </div>
 
+      {/* Для маленьких экранов */}
       <div className="mt-4 lg:hidden flex flex-col md:flex-row justify-between items-center text-gray-700 text-sm">
         <span>
           Показано {(currentPage - 1) * rowsPerPage + 1} -{" "}

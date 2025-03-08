@@ -1,5 +1,6 @@
 import axiosBase from '@/lib/axiosBase';
 
+// Вход в систему
 export const loginUser = async (credentials) => {
   try {
     const response = await axiosBase.post('/auth/login', credentials);
@@ -9,6 +10,7 @@ export const loginUser = async (credentials) => {
   }
 };
 
+// Регистрация пользователя
 export const registerUser = async (userData) => {
   try {
     const response = await axiosBase.post('/auth/register', userData);
@@ -18,6 +20,7 @@ export const registerUser = async (userData) => {
   }
 };
 
+// Получить всех пользователей
 export const getUsers = async () => {
   try {
     const response = await axiosBase.get('/auth/users');
@@ -27,6 +30,7 @@ export const getUsers = async () => {
   }
 };
 
+// Получить информацию о пользователе спомощью токена
 export const getUserInfo = async (token) => {
   try {
     const response = await axiosBase.get('/auth/if_user', {
